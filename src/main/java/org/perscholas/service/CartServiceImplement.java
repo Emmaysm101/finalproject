@@ -30,20 +30,13 @@ public class CartServiceImplement implements CartService {
 
     @Override
     public List<Cart> listCartItems(Users users) {
-        return cartRepository.findByUsers_UserId(users.getUserId());
+//        return cartRepository.findByUsers_UserId(users.getUserId());
+        return null;
     }
 
     @Override
     public void saveCart(Cart cart) {
-        if (cart.getCartId() == null) {
-            this.cartRepository.save(cart);
-        } else {
-            Optional<Cart> c = cartRepository.findById(cart.getCartId());
-            if (c.isPresent()) {
-                c.get().setOrderQuantity(cart.getOrderQuantity());
-                this.cartRepository.save(c.get());
-            }
-        }
+        cartRepository.save(cart);
     }
 
     @Override
@@ -53,38 +46,41 @@ public class CartServiceImplement implements CartService {
 
     @Override
     public Items getItemById(long id) {
-        Optional<Items> optional = itemsRepository.findById(id);
-        Items items = null;
-        if (optional.isPresent()) {
-            items = optional.get();
-        } else {
-            throw new RuntimeException("Item not found for id");
-        }
-        return items;
+//        Optional<Items> optional = itemsRepository.findById(id);
+//        Items items = null;
+//        if (optional.isPresent()) {
+//            items = optional.get();
+//        } else {
+//            throw new RuntimeException("Item not found for id");
+//        }
+//        return items;
+        return null;
     }
 
     @Override
     public Users getUserById(long id) {
-        Optional<Users> optional = usersRepository.findById(id);
-        Users users = null;
-        if (optional.isPresent()) {
-            users = optional.get();
-        } else {
-            throw new RuntimeException("User not found for id");
-        }
-        return users;
+//        Optional<Users> optional = usersRepository.findById(id);
+//        Users users = null;
+//        if (optional.isPresent()) {
+//            users = optional.get();
+//        } else {
+//            throw new RuntimeException("User not found for id");
+//        }
+//        return users;
+        return null;
     }
 
     @Override
     public Cart getCartById(long id) {
-        Optional<Cart> optional = cartRepository.findById(id);
-        Cart cart = null;
-        if (optional.isPresent()) {
-            cart = optional.get();
-        } else {
-            throw new RuntimeException("Cart not found for id");
-        }
-        return cart;
+//        Optional<Cart> optional = cartRepository.findById(id);
+//        Cart cart = null;
+//        if (optional.isPresent()) {
+//            cart = optional.get();
+//        } else {
+//            throw new RuntimeException("Cart not found for id");
+//        }
+//        return cart;
+        return null;
     }
 
     @Override

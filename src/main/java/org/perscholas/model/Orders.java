@@ -1,10 +1,18 @@
 package org.perscholas.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Table(name="orders")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Orders {
 
     @Id
@@ -12,43 +20,14 @@ public class Orders {
     @Column(name="orderId")
     private Long orderId;
 
-    @Column(name="userNum")
-    private Long userNum;
+    @ManyToOne (targetEntity = Users.class, cascade = {CascadeType.PERSIST})
+    @JoinColumn(name ="userNum", referencedColumnName="userNum")
+    private Users users;
 
     @Column(name="orderStatus")
     private String orderStatus;
 
-    public Orders() {
-    }
-
-    public Orders(Long userNum,  String orderStatus) {
-        this.userNum = userNum;
-        this.orderStatus = orderStatus;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public Long getUserNum() {
-        return userNum;
-    }
-
-    public void setUserNum(Long userNum) {
-        this.userNum = userNum;
-    }
-
-    public String getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
-    }
-
+    @OneToOne(mappedBy = "orders", cascade = CascadeType.ALL)
+    private Cart cart;
 
 }

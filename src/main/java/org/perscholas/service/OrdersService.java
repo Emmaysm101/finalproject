@@ -2,13 +2,14 @@ package org.perscholas.service;
 
 import org.perscholas.model.Orders;
 import org.perscholas.model.Users;
+import org.springframework.security.core.Authentication;
 
 import java.util.List;
 
 public interface OrdersService {
     List<Orders> getAllOrders();
 
-    void saveOrder(Orders orders);
+    void saveOrder(long id, int quantity, Authentication authentication);
 
     Orders getOrderById (long id);
 

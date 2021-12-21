@@ -31,28 +31,28 @@ public class CartController {
 
     @GetMapping("/cart")
     public String cartHome(Model model, Authentication authentication) {
-        Users user = usersService.getCurrentlyLoggedInCustomer(authentication);
-        List<Cart> cartItemsByUser = cartService.listCartItems(user);
-        model.addAttribute("listCartItems", cartItemsByUser);
+//        Users user = usersService.getCurrentlyLoggedInCustomer(authentication);
+//        List<Cart> cartItemsByUser = cartService.listCartItems(user);
+//        model.addAttribute("listCartItems", cartItemsByUser);
         return "cart";
     }
 
     @GetMapping("/showFormForUpdateCart/{id}")
     public String showFormForUpdateCart(@PathVariable(value = "id") long id, Model model) {
-        Cart cart = cartService.getCartById(id);
-        model.addAttribute("cart", cart);
+//        Cart cart = cartService.getCartById(id);
+//        model.addAttribute("cart", cart);
         return "update_cart";
     }
 
     @GetMapping("/deleteCart/{id}")
     public String deleteCart(@PathVariable(value = "id") long id) {
-        this.cartService.deleteCartById(id);
+//        this.cartService.deleteCartById(id);
         return "redirect:/cart";
     }
 
     @PostMapping("/saveCart")
     public String saveCart(Cart cart) {
-        cartService.saveCart(cart);
+//        cartService.saveCart(cart);
         return "redirect:/cart";
     }
 
