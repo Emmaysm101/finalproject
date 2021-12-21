@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Sign in</title>
+        <link rel="stylesheet" href="signin.css" />
+        
+    </head>
+    <body>
+        <header class="header">
+            <div class="brand">
+                <a th:href="@{/}">MarHat</a>
+            </div>
+            <div class="header-links">
+                <!--                    <a th:href="">Cart</a>-->
+                <a th:href="@{/login}">Sign In</a>
+                <a th:href = "@{/adminHome}">Admin</a>
+            </div>
+        </header>
+        <main>
+            <br>
+            <br>
+            <form th:action="@{/login}" method="post" id='form' name = "myForm">
+                <div th:if="${param.error}">
+                    <div class="alert alert-danger">Invalid username or
+                        password.</div>
+                    <p>[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+                </div>
+                <div th:if="${param.logout}">
+                    <div class="alert alert-info">You have been logged out.</div>
+                </div>
+
+                <div class="container">
+                  <label ><b>Username</b></label>
+                  <input type="text" id="uname" placeholder="Enter Username" name="username">
+
+                  <label><b>Password</b></label>
+                  <input type="password" id="password" placeholder="Enter Password" name="password">
+
+                  <button type="submit" id="submit" name="login-submit" value="Log In" >Login</button>
+                  <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                  </label>
+                </div>
+
+                <div class="container" style="background-color:#f1f1f1">
+                  <button type="button" class="cancelbtn">Cancel</button>
+                    <span><a th:href="@{/registration}">Make a new account here</a></span>
+                </div>
+
+              </form>
+        </main>
+<!--          <script th:src="@{signin.js}"></script>-->
+    </body>
+</html>

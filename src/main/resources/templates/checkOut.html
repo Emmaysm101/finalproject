@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Check Out</title>
+    <link rel="stylesheet" href="" />
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+                      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+<header class="header">
+    <div class="brand">
+        <a th:href="@{/}">MarHat</a>
+    </div>
+    <div class="header-links">
+        <a th:href="@{/cart}">Cart</a>
+        <a th:href="@{/signin}">Sign In</a>
+        <a th:href = "@{/adminHome}">Admin</a>
+    </div>
+</header>
+<h1>Check Out Page</h1>
+<table border="1" class="table table-striped table-responsive-md">
+    <thead>
+    <tr>
+        <th>Order Id</th>
+        <th>User Number</th>
+        <th>Order Status</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="orders : ${orderList}">
+        <td th:text="${orders.orderId}"></td>
+        <td th:text="${orders.userNum}"></td>
+        <td th:text="${orders.orderStatus}"></td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/}">Buy more items</a>
+</body>
+</html>

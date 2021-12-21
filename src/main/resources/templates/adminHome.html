@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+    	<meta charset="ISO-8859-1">
+        <title>Admin Page</title>
+        <link rel="stylesheet" href="" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    </head>
+    
+    <body>
+        <header class="header">
+            <div class="brand">
+                <a th:href="@{/}">MarHat</a>
+            </div>
+            <div class="header-links">
+                <!--                    <a th:href="">Cart</a>-->
+                <a th:href="@{/signin}">Sign In</a>
+                <a th:href = "@{/adminHome}">Admin</a>
+            </div>
+        </header>
+        <div class="grid-container">
+            <br>
+            <br>
+            <h1>Admin Page</h1>
+                <div class="brand">
+                    
+                    <a th:href = "@{/userList}">Users</a>
+                    <a th:href = "@{/itemList}">Items</a>
+                    <a th:href = "@{/orderList}">Orders</a>
+                    <a th:href = "@{/usersRolesList}">Roles</a>
+                </div>
+               
+
+            
+                
+            
+            <footer class="footer">
+            
+            </footer>
+        </div>
+        
+    </body>
+</html>

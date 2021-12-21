@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Users Roles Management System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container my-2">
+
+    <h1> Users Roles List </h1>
+    <a th:href = "@{/showNewUsersRolesForm}" class="btn btn-primary btn-sm mb-3">Add Order</a>
+    <p>Role ID 1="Customer"  2="Admin"</p>
+    <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>User Id</th>
+            <th>Role Id</th>
+            <th>Actions </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="usersRoles : ${listUsersRoles}">
+            <td th:text="${usersRoles.userId}"></td>
+            <td th:text="${usersRoles.roleId}"></td>
+            <td> <a th:href="@{/showFormForUpdateUsersRoles/{id}(id=${usersRoles.userId})}" class="btn btn-primary">Update</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

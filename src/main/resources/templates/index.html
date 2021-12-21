@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+
+        <meta charset="ISO-8859-1">
+        <title>Online Shopping</title>
+        <link rel="stylesheet" href="style.css" />
+<!--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"-->
+<!--              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">-->
+
+    </head>
+    
+    <body>
+        <div class="grid-container">
+            <header class="header">
+                <div class="brand">
+                    <a th:href="@{/}">MarHat</a>
+                </div>
+                <div class="header-links">
+                    <a th:href="@{/cart}">Cart</a>
+                    <a th:href="@{/login}">Sign In</a>
+                    <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Sign Out</a>
+                    <a sec:authorize="hasAuthority('Admin')" th:href="@{/adminHome}">Admin</a>
+                </div>
+            </header>
+            <main class="main">
+                <div class="content">
+                    <ul class="products">
+                        <li>
+                            <div class="product" th:each="items : ${listItems}">
+                                <img class= "product-image" th:src="${items.image}" th:alt="${items.itemName}" />
+                                <a th:href="@{/itemDetail/{id}(id=${items.itemId})}" th:text="${items.itemName}"></a>
+                                Price $<div class="product-price" th:text="${items.itemPrice}"></div>
+                                Available Quantity:<div class="product-quantity" th:text="${items.availableQuantity}"> </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </main>
+<!--            <footer class="footer">-->
+<!--            -->
+<!--            </footer>-->
+        </div>
+        
+    </body>
+</html>

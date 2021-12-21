@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cart</title>
+    <link rel="stylesheet" href="" />
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+                  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script language="javascript">
+    console.log(document.getElementsByClassName('unitPrice'))
+    let x = document.getElementsByClassName('unitPrice')
+        let p = document.getElementsByClassName('unitPrice')
+        let y = p[0]
+        console.log(y);
+<!--        let q = document.getElementsByClassName('quantity')[0]-->
+<!--        let result = p * q;-->
+<!--        console.log(result);-->
+<!--        document.getElementsByClassName('result')[0].innerText = result;-->
+    </script>
+</head>
+    <body>
+        <header class="header">
+            <div class="brand">
+                <a th:href="@{/}">MarHat</a>
+            </div>
+            <div class="header-links">
+                <!--                    <a th:href="">Cart</a>-->
+                <a th:href="@{/signin}">Sign In</a>
+                <a th:href = "@{/adminHome}">Admin</a>
+            </div>
+        </header>
+        <h1>Cart Page</h1>
+            <table border="1" class="table table-striped table-responsive-md">
+                <thead>
+                <tr>
+<!--                    <th>User Number</th>-->
+<!--                    <th>Item ID</th>-->
+                    <th>Item Name</th>
+                    <th>Unit Price</th>
+                    <th>Order Quantity</th>
+                    <th>Order ID</th>
+                    <th>Sub Total</th>
+                    <th>Actions </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="cart : ${listCartItems}">
+<!--                    <td th:text="${cart.userId}"></td>-->
+<!--                    <td th:text="${cart.itemId}"></td>-->
+                    <td th:text="${cart.itemName}"></td>
+                    <td class='unitPrice' th:text="${cart.items.itemPrice}"></td>
+                    <td class= 'quantity' th:text="${cart.orderQuantity}"></td>
+                    <td th:text="${cart.orderId}"></td>
+                    <td><span class='result'></span></td>
+                    <td> <a th:href="@{/showFormForUpdateCart/{id}(id=${cart.cartId})}" class="btn btn-primary">Update</a>
+                        <a th:href="@{/deleteCart/{id}(id=${cart.cartId})}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        <a th:href="@{/}">Buy more items</a>
+        <a th:href="@{/checkOut}">Check Out</a>
+<!--        <script th:src="@{../cart.js}"></script>-->
+    </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
+    <head>
+        <meta charset="ISO-8859-1">
+        <title>Item details</title>
+        <link rel="stylesheet" href="../product.css" />
+<!--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"-->
+<!--              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">-->
+    </head>
+    <body>
+        <header class="header">
+            <div class="brand">
+                <a th:href="@{/}">MarHat</a>
+            </div>
+            <div class="header-links">
+                <!--                    <a th:href="">Cart</a>-->
+                <a th:href="@{/signin}">Sign In</a>
+                <a th:href="@{/adminHome}">Admin</a>
+            </div>
+        </header>
+        <div>
+            <input type="button" value="Back" onclick="goBack()" id="goBack">
+            <div class="details">
+                
+                <div class="details-info" >
+                    <div class="details-image">
+                        <img th:src="'../' + ${items.image}" th:alt="${items.itemName}"></img>
+                    </div>
+
+                        <h4 class="pName" th:text="${items.itemName}"></h4>
+                        Price: $<p class="pPrice" th:text="${items.itemPrice}"></p>
+                        Available Quantity<b class="aQuantity" th:text="${items.availableQuantity}"></b>
+
+                </div>
+                <div class="details-action">
+                    <ul>
+                        <li class="pPrice">
+                            Price: <p class="pPrice" th:text="${items.itemPrice}"></p>
+                        </li>
+<!--                        <li class="pQuantity" th:replace="quantity_control :: quantity_control(1, ${items.itemId})">-->
+                        <form action="#" th:action="@{/saveCustomerOrder/{id}(id=${items.itemId})}" th:object="${orders}"
+                              method="POST">
+                        <li>
+                        <label >Order Quantity:</label>
+
+
+                            <select name="orderQuantity" id="pQuantity">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </li>
+                        <li>
+                            <button type="submit">Add to cart</button>
+                        </li>
+                        </form>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+        <script th:src="@{../product.js}"></script>
+    </body>
+</html>
