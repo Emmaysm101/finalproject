@@ -46,10 +46,10 @@
                 <tr th:each="cart : ${listCartItems}">
 <!--                    <td th:text="${cart.userId}"></td>-->
 <!--                    <td th:text="${cart.itemId}"></td>-->
-                    <td th:text="${cart.itemName}"></td>
+                    <td th:text="${cart.items.itemName}"></td>
                     <td class='unitPrice' th:text="${cart.items.itemPrice}"></td>
                     <td class= 'quantity' th:text="${cart.orderQuantity}"></td>
-                    <td th:text="${cart.orderId}"></td>
+                    <td th:text="${cart.orders.orderId}"></td>
                     <td><span class='result'></span></td>
                     <td> <a th:href="@{/showFormForUpdateCart/{id}(id=${cart.cartId})}" class="btn btn-primary">Update</a>
                         <a th:href="@{/deleteCart/{id}(id=${cart.cartId})}" class="btn btn-danger">Delete</a>

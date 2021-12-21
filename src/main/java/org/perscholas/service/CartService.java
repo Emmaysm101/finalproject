@@ -12,7 +12,7 @@ public interface CartService {
 
     void saveCart(Cart cart);
 
-    List<Cart> getAllCartItems();
+    List<Cart> getAllCartItemsByOrderId(Long id);
 
     Items getItemById(long id);
 
@@ -21,4 +21,7 @@ public interface CartService {
     Cart getCartById(long id);
 
     void deleteCartById(long id);
+
+
+
 }

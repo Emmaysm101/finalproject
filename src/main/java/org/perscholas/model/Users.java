@@ -34,7 +34,7 @@ public class Users implements Serializable {
 	@Column(name="userAddress")
 	private String userAddress;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable (
 			name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "userNum"),
 			inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")

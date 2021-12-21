@@ -9,6 +9,8 @@ import java.util.List;
 public interface OrdersService {
     List<Orders> getAllOrders();
 
+    Orders getPendingOrder(Authentication authentication);
+
     void saveOrder(long id, int quantity, Authentication authentication);
 
     Orders getOrderById (long id);

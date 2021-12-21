@@ -1,5 +1,6 @@
 package org.perscholas.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,6 +32,7 @@ public class Items {
 	@Column(name="image")
 	private String image;
 
+	@JsonBackReference
 	@OneToMany(mappedBy = "items")
 	List<Cart> carts;
 

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name="orders")
@@ -27,7 +28,7 @@ public class Orders {
     @Column(name="orderStatus")
     private String orderStatus;
 
-    @OneToOne(mappedBy = "orders", cascade = CascadeType.ALL)
-    private Cart cart;
+    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
+    private List<Cart> cart;
 
 }

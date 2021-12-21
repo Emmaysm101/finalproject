@@ -24,7 +24,7 @@ public class Cart {
     @Column(name = "orderQuantity")
     private int orderQuantity;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "orderId", referencedColumnName = "orderId")
     private Orders orders;
 

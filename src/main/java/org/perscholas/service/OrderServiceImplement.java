@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,9 @@ public class OrderServiceImplement implements OrdersService {
 
     @Autowired
     private OrdersRepository ordersRepository;
+
+    @Autowired
+    private CartService cartService;
 
     @Autowired
     ItemsService itemsService;
@@ -37,22 +41,28 @@ public class OrderServiceImplement implements OrdersService {
         Long userNum = user.getUserNum();
         List<Orders> orders = getOrderByUserNum(userNum);
         Items items = itemsService.getItemById(id);
-        if(orders.isEmpty() || orders.stream().allMatch(order-> order.getOrderStatus().equals("Complete"))) {
+        if (orders.isEmpty() || orders.stream().allMatch(order -> order.getOrderStatus().equals("Complete"))) {
             Orders tempOrder = new Orders();
             tempOrder.setUsers(user);
             tempOrder.setOrderStatus("Pending");
-
 
             Cart tempCart = new Cart();
             tempCart.setItems(items);
             tempCart.setOrders(tempOrder);
             tempCart.setOrderQuantity(quantity);
 
-            tempOrder.setCart(tempCart);
+            tempOrder.setCart(new ArrayList<>());
+            tempOrder.getCart().add(tempCart);
 
             this.ordersRepository.save(tempOrder);
+        } else {
+            Orders pendingOrder = orders.stream().filter(order -> order.getOrderStatus().equals("Pending")).findFirst().get();
+            Cart tempCart = new Cart();
+            tempCart.setItems(items);
+            tempCart.setOrders(pendingOrder);
+            tempCart.setOrderQuantity(quantity);
+            cartService.saveCart(tempCart);
         }
-//        return this.ordersRepository.save(orders);
     }
 
     @Override
@@ -76,6 +86,14 @@ public class OrderServiceImplement implements OrdersService {
     public List<Orders> getOrderByUserNum(long id) {
         List<Orders> orderList = ordersRepository.findByUsers_UserNum(id);
         return orderList;
-
     }
+
+    @Override
+    public Orders getPendingOrder(Authentication authentication) {
+        Users user = usersService.getCurrentlyLoggedInCustomer(authentication);
+        Long userNum = user.getUserNum();
+        List<Orders> orders = getOrderByUserNum(userNum);
+        return orders.stream().filter(order -> order.getOrderStatus().equals("Pending")).findFirst().orElse(null);
+    }
+
 }

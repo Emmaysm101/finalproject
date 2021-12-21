@@ -40,8 +40,8 @@ public class CartServiceImplement implements CartService {
     }
 
     @Override
-    public List<Cart> getAllCartItems() {
-        return cartRepository.findAll();
+    public List<Cart> getAllCartItemsByOrderId(Long id) {
+        return cartRepository.findAllByOrders_OrderId(id);
     }
 
     @Override

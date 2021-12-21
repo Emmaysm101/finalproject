@@ -4,6 +4,7 @@ package org.perscholas.controller;
 import org.perscholas.model.*;
 import org.perscholas.service.CartService;
 import org.perscholas.service.ItemsService;
+import org.perscholas.service.OrdersService;
 import org.perscholas.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -29,11 +30,18 @@ public class CartController {
     @Autowired
     private ItemsService itemService;
 
+    @Autowired
+    OrdersService ordersService;
+
     @GetMapping("/cart")
     public String cartHome(Model model, Authentication authentication) {
-//        Users user = usersService.getCurrentlyLoggedInCustomer(authentication);
+        Orders pendingOrder = ordersService.getPendingOrder(authentication);
+        if(pendingOrder != null) {
+            List<Cart> listCartItems = cartService.getAllCartItemsByOrderId(pendingOrder.getOrderId());
+            model.addAttribute("listCartItems", listCartItems);
+        }
+
 //        List<Cart> cartItemsByUser = cartService.listCartItems(user);
-//        model.addAttribute("listCartItems", cartItemsByUser);
         return "cart";
     }
 
