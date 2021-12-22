@@ -32,7 +32,7 @@
                                 <img class= "product-image" th:src="${items.image}" th:alt="${items.itemName}" />
                                 <a th:href="@{/itemDetail/{id}(id=${items.itemId})}" th:text="${items.itemName}"></a>
                                 Price $<div class="product-price" th:text="${items.itemPrice}"></div>
-                                Available Quantity:<div class="product-quantity" th:text="${items.availableQuantity}"> </div>
+
                             </div>
                         </li>
 
@@ -43,6 +43,6 @@
 <!--            -->
 <!--            </footer>-->
         </div>
-        
+
     </body>
 </html>

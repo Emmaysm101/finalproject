@@ -18,4 +18,6 @@ public interface OrdersService {
     void deleteOrderById(long id);
 
     List<Orders> getOrderByUserNum(long id);
+
+    void checkOutSave (Orders orders);
 }

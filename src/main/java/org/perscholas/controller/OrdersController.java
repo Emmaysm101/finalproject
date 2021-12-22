@@ -50,20 +50,20 @@ public class OrdersController {
 
     @PostMapping("/saveOrder")
     public String saveOrder(@ModelAttribute("orders") Orders orders) {
-//        ordersService.saveOrder(orders);
+        ordersService.checkOutSave(orders);
         return "redirect:/orderList";
     }
 
     @GetMapping("/showFormForUpdateOrder/{id}")
     public String showFormForUpdateOrder(@PathVariable(value = "id") long id, Model model) {
-//        Orders orders = ordersService.getOrderById(id);
-//        model.addAttribute("orders", orders);
+        Orders orders = ordersService.getOrderById(id);
+        model.addAttribute("orders", orders);
         return "update_order";
     }
 
     @GetMapping("/deleteOrder/{id}")
     public String deleteOrder(@PathVariable(value = "id") long id) {
-//        this.ordersService.deleteOrderById(id);
+        this.ordersService.deleteOrderById(id);
         return "redirect:/orderList";
     }
 
@@ -74,6 +74,24 @@ public class OrdersController {
     }
     @GetMapping("/checkOut")
     public String checkOut(Model model, Authentication authentication) {
+        Users users = usersService.getCurrentlyLoggedInCustomer(authentication);
+        Long userNum = users.getUserNum();
+        List<Orders> orderList = ordersService.getOrderByUserNum(userNum);
+
+        for (int i=0; i<orderList.size(); i++) {
+            if ((orderList.get(i).getOrderStatus()).equals("Pending")) {
+                orderList.get(i).setOrderStatus("Completed");
+                ordersService.checkOutSave(orderList.get(i));
+            }
+        }
+
+        model.addAttribute("orderList", orderList);
         return "checkOut";
+    }
+
+    @GetMapping("/orderListAllUsers")
+    public String orderListAllUsers(Model model){
+        model.addAttribute("orderListAllUsers", ordersService.getAllOrders());
+        return "list_order_all";
     }
 }

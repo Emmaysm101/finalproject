@@ -44,8 +44,6 @@
                 </thead>
                 <tbody>
                 <tr th:each="cart : ${listCartItems}">
-<!--                    <td th:text="${cart.userId}"></td>-->
-<!--                    <td th:text="${cart.itemId}"></td>-->
                     <td th:text="${cart.items.itemName}"></td>
                     <td class='unitPrice' th:text="${cart.items.itemPrice}"></td>
                     <td class= 'quantity' th:text="${cart.orderQuantity}"></td>

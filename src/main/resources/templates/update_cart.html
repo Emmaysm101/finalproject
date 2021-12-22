@@ -16,13 +16,12 @@
     <form action="#" th:action="@{/saveCart}" th:object="${cart}"
           method="POST">
         <input type="hidden" th:field="*{cartId}" />
-<!--        <input type="hidden" th:field="*{users.userId}" />-->
         <input type="hidden" th:field="*{items.itemId}" />
-        <input type="text" th:field="*{itemName}" placeholder="Item Name"
+        <input type="text" th:field="*{items.itemName}" placeholder="Item Name"
                class="form-control mb-4 col-4">
         <input type="text" th:field="*{orderQuantity}" placeholder="Order Quantity"
                class="form-control mb-4 col-4">
-        <input type="hidden" th:field="*{orderId}" />
+        <input type="hidden" th:field="*{orders.orderId}" />
         <button type="submit" class="btn btn-info col-2">Update Cart Items</button>
     </form>
     <hr>

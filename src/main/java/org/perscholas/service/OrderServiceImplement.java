@@ -41,6 +41,7 @@ public class OrderServiceImplement implements OrdersService {
         Long userNum = user.getUserNum();
         List<Orders> orders = getOrderByUserNum(userNum);
         Items items = itemsService.getItemById(id);
+        String itemName = items.getItemName();
         if (orders.isEmpty() || orders.stream().allMatch(order -> order.getOrderStatus().equals("Complete"))) {
             Orders tempOrder = new Orders();
             tempOrder.setUsers(user);
@@ -55,14 +56,33 @@ public class OrderServiceImplement implements OrdersService {
             tempOrder.getCart().add(tempCart);
 
             this.ordersRepository.save(tempOrder);
-        } else {
-            Orders pendingOrder = orders.stream().filter(order -> order.getOrderStatus().equals("Pending")).findFirst().get();
-            Cart tempCart = new Cart();
-            tempCart.setItems(items);
-            tempCart.setOrders(pendingOrder);
-            tempCart.setOrderQuantity(quantity);
-            cartService.saveCart(tempCart);
-        }
+            } else {
+                Orders pendingOrder = orders.stream().filter(order -> order.getOrderStatus().equals("Pending")).findFirst().get();
+                boolean exists = false;
+                if (pendingOrder.getCart().size() !=0) {
+                    for (int i = 0; i < pendingOrder.getCart().size(); i++) {
+                        if (pendingOrder.getCart().get(i).getItems().getItemName().equals(itemName)) {
+                            exists = true;
+                            int orderQuantity = pendingOrder.getCart().get(i).getOrderQuantity();
+                            pendingOrder.getCart().get(i).setOrderQuantity(orderQuantity + quantity);
+                            cartService.saveCart(pendingOrder.getCart().get(i));
+                        }
+                    }
+                    if (!exists) {
+                        Cart tempCart = new Cart();
+                        tempCart.setItems(items);
+                        tempCart.setOrders(pendingOrder);
+                        tempCart.setOrderQuantity(quantity);
+                        cartService.saveCart(tempCart);
+                    }
+                } else {
+                    Cart tempCart = new Cart();
+                    tempCart.setItems(items);
+                    tempCart.setOrders(pendingOrder);
+                    tempCart.setOrderQuantity(quantity);
+                    cartService.saveCart(tempCart);
+                }
+            }
     }
 
     @Override
@@ -79,7 +99,7 @@ public class OrderServiceImplement implements OrdersService {
 
     @Override
     public void deleteOrderById(long id) {
-//        this.ordersRepository.deleteById(id);
+        this.ordersRepository.deleteById(id);
     }
 
     @Override
@@ -94,6 +114,11 @@ public class OrderServiceImplement implements OrdersService {
         Long userNum = user.getUserNum();
         List<Orders> orders = getOrderByUserNum(userNum);
         return orders.stream().filter(order -> order.getOrderStatus().equals("Pending")).findFirst().orElse(null);
+    }
+
+    @Override
+    public void checkOutSave (Orders orders) {
+        this.ordersRepository.save(orders);
     }
 
 }

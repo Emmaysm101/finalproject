@@ -11,7 +11,6 @@
  <div class="container my-2">
  
  <h1> Order List </h1>
- <a th:href = "@{/showNewOrderForm}" class="btn btn-primary btn-sm mb-3">Add Order</a>
  <table border="1" class="table table-striped table-responsive-md">
  	<thead>
         <tr>
@@ -22,7 +21,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="orders : ${listOrders}">
+        <tr th:each="orders : ${orderListAllUsers}">
         	<td th:text="${orders.orderId}"></td>
             <td th:text="${orders.users.userNum}"></td>
             <td th:text="${orders.orderStatus}"></td>

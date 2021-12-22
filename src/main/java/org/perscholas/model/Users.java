@@ -1,5 +1,6 @@
 package org.perscholas.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,13 +35,14 @@ public class Users implements Serializable {
 	@Column(name="userAddress")
 	private String userAddress;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinTable (
 			name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "userNum"),
 			inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
 	)
 	private List<Role> roles;
 
+	@JsonBackReference
 	@OneToMany(mappedBy = "users")
 	List<Orders> orders;
 

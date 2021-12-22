@@ -16,7 +16,7 @@
 		<form action="#" th:action="@{/saveOrder}" th:object="${orders}"
 			method="POST">
 			<input type="hidden" th:field="*{orderId}" />
-			<input type="text" th:field="*{userNum}" placeholder="User Number"
+			<input type="text" th:field="*{users.userNum}" placeholder="User Number"
 				class="form-control mb-4 col-4">
 			<input type="text" th:field="*{orderStatus}" placeholder="Order Status"
 				class="form-control mb-4 col-4">

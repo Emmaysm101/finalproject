@@ -28,11 +28,6 @@ public class CartServiceImplement implements CartService {
         this.cartRepository = cartRepository;
     }
 
-    @Override
-    public List<Cart> listCartItems(Users users) {
-//        return cartRepository.findByUsers_UserId(users.getUserId());
-        return null;
-    }
 
     @Override
     public void saveCart(Cart cart) {
@@ -46,41 +41,27 @@ public class CartServiceImplement implements CartService {
 
     @Override
     public Items getItemById(long id) {
-//        Optional<Items> optional = itemsRepository.findById(id);
-//        Items items = null;
-//        if (optional.isPresent()) {
-//            items = optional.get();
-//        } else {
-//            throw new RuntimeException("Item not found for id");
-//        }
-//        return items;
-        return null;
+        Optional<Items> optional = itemsRepository.findById(id);
+        Items items = null;
+        if (optional.isPresent()) {
+            items = optional.get();
+        } else {
+            throw new RuntimeException("Item not found for id");
+        }
+        return items;
     }
 
-    @Override
-    public Users getUserById(long id) {
-//        Optional<Users> optional = usersRepository.findById(id);
-//        Users users = null;
-//        if (optional.isPresent()) {
-//            users = optional.get();
-//        } else {
-//            throw new RuntimeException("User not found for id");
-//        }
-//        return users;
-        return null;
-    }
 
     @Override
     public Cart getCartById(long id) {
-//        Optional<Cart> optional = cartRepository.findById(id);
-//        Cart cart = null;
-//        if (optional.isPresent()) {
-//            cart = optional.get();
-//        } else {
-//            throw new RuntimeException("Cart not found for id");
-//        }
-//        return cart;
-        return null;
+        Optional<Cart> optional = cartRepository.findById(id);
+        Cart cart = null;
+        if (optional.isPresent()) {
+            cart = optional.get();
+        } else {
+            throw new RuntimeException("Cart not found for id");
+        }
+        return cart;
     }
 
     @Override

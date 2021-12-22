@@ -26,9 +26,6 @@ public class Items {
 	@Column(name="itemPrice")
 	private double itemPrice;
 	
-	@Column(name="availableQuantity")
-	private int availableQuantity;
-	
 	@Column(name="image")
 	private String image;
 

@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import org.perscholas.controller.dto.UserRegistrationDto;
 import org.perscholas.model.Role;
 import org.perscholas.model.Users;
+import org.perscholas.repository.RoleRepository;
 import org.perscholas.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -22,10 +23,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class UsersServiceImplement implements UsersService {
 
+    @Autowired
     private UsersRepository usersRepository;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     public UsersServiceImplement(UsersRepository usersRepository) {
         this.usersRepository = usersRepository;
@@ -39,7 +44,6 @@ public class UsersServiceImplement implements UsersService {
     @Override
     public void saveUser(Users users) {
         this.usersRepository.save(users);
-
     }
 
     @Override
@@ -61,8 +65,9 @@ public class UsersServiceImplement implements UsersService {
 
     @Override
     public Users save(UserRegistrationDto registrationDto) {
+        Optional<Role> role = roleRepository.findById(1l);
         Users users = new Users(registrationDto.getUserId(), passwordEncoder.encode(registrationDto.getUserPw()),
-                registrationDto.getUserName(), registrationDto.getUserAddress(), Arrays.asList(new Role("Customer")));
+                registrationDto.getUserName(), registrationDto.getUserAddress(), Arrays.asList(role.get()));
         return usersRepository.save(users);
     }
 
