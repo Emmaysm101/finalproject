@@ -25,12 +25,17 @@ public class CartServiceImplement implements CartService {
     private CartRepository cartRepository;
 
     public CartServiceImplement(CartRepository cartRepository) {
+
         this.cartRepository = cartRepository;
     }
 
 
     @Override
     public void saveCart(Cart cart) {
+        Long id = cart.getItems().getItemId();
+        int quantity = cart.getOrderQuantity();
+        double price = itemsRepository.getById(id).getItemPrice();
+        cart.setSubTotal(price * quantity);
         cartRepository.save(cart);
     }
 
@@ -58,6 +63,7 @@ public class CartServiceImplement implements CartService {
         Cart cart = null;
         if (optional.isPresent()) {
             cart = optional.get();
+
         } else {
             throw new RuntimeException("Cart not found for id");
         }

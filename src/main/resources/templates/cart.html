@@ -1,62 +1,70 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Cart</title>
-    <link rel="stylesheet" href="" />
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-                  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script language="javascript">
-    console.log(document.getElementsByClassName('unitPrice'))
-    let x = document.getElementsByClassName('unitPrice')
-        let p = document.getElementsByClassName('unitPrice')
-        let y = p[0]
-        console.log(y);
-<!--        let q = document.getElementsByClassName('quantity')[0]-->
-<!--        let result = p * q;-->
-<!--        console.log(result);-->
-<!--        document.getElementsByClassName('result')[0].innerText = result;-->
-    </script>
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Cart</title>
+        <link rel="stylesheet" href="cart.css" />
+        <link rel="stylesheet" href=""/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    </head>
     <body>
-        <header class="header">
-            <div class="brand">
-                <a th:href="@{/}">MarHat</a>
-            </div>
-            <div class="header-links">
-                <!--                    <a th:href="">Cart</a>-->
-                <a th:href="@{/signin}">Sign In</a>
-                <a th:href = "@{/adminHome}">Admin</a>
-            </div>
-        </header>
+    <header class="header">
+        <div class="brand">
+            <a th:href="@{/}">HATRITA</a>
+        </div>
+        <div class="header-links">
+            <a th:href="@{/cart}">Cart</a>
+            <a th:href="@{/login}">Sign In</a>
+            <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Sign Out</a>
+            <a sec:authorize="hasAuthority('Admin')" th:href="@{/adminHome}">Admin</a>
+        </div>
+    </header>
         <h1>Cart Page</h1>
-            <table border="1" class="table table-striped table-responsive-md">
-                <thead>
-                <tr>
-<!--                    <th>User Number</th>-->
-<!--                    <th>Item ID</th>-->
-                    <th>Item Name</th>
-                    <th>Unit Price</th>
-                    <th>Order Quantity</th>
-                    <th>Order ID</th>
-                    <th>Sub Total</th>
-                    <th>Actions </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="cart : ${listCartItems}">
-                    <td th:text="${cart.items.itemName}"></td>
-                    <td class='unitPrice' th:text="${cart.items.itemPrice}"></td>
-                    <td class= 'quantity' th:text="${cart.orderQuantity}"></td>
-                    <td th:text="${cart.orders.orderId}"></td>
-                    <td><span class='result'></span></td>
-                    <td> <a th:href="@{/showFormForUpdateCart/{id}(id=${cart.cartId})}" class="btn btn-primary">Update</a>
-                        <a th:href="@{/deleteCart/{id}(id=${cart.cartId})}" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        <a th:href="@{/}">Buy more items</a>
-        <a th:href="@{/checkOut}">Check Out</a>
-<!--        <script th:src="@{../cart.js}"></script>-->
+        <div class="row m-1">
+            <div class="col-sm-8">
+                <table border="1" class="table table-striped table-responsive-md">
+                    <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Unit Price</th>
+                        <th>Order Quantity</th>
+                        <th>Order ID</th>
+                        <th>Sub Total</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="cartSize"th:each="cart : ${listCartItems}">
+                        <td th:text="${cart.items.itemName}"></td>
+                        <td class='unitPrice' th:text="${cart.items.itemPrice}"></td>
+                        <td class='quantity' th:text="${cart.orderQuantity}"></td>
+                        <td th:text="${cart.orders.orderId}"></td>
+                        <td class="subTotal" th:text="${cart.subTotal}"></td>
+                        <td><a th:href="@{/showFormForUpdateCart/{id}(id=${cart.cartId})}" class="btn btn-info">Update</a>
+                            <a th:href="@{/deleteCart/{id}(id=${cart.cartId})}" class="btn btn-info">Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-4">
+                <h3>Estimate Total:
+                    <h5 id="total"></h5>
+                    <h5 id="tax"></h5>
+                    <h4 id="afterTax"></h4>
+                </h3>
+                <a th:href="@{/checkOut}" class="btn btn-primary">Check Out</a>
+            </div>
+        </div>
+        <a th:href="@{/}" class="btn btn-warning">Buy more items</a>
+        <a th:href="@{/checkOut}" class="btn btn-info">See Previous Orders</a>
+        <script th:src="@{../cart.js}"></script>
     </body>
 </html>

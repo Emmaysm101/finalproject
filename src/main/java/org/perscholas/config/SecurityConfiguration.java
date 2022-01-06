@@ -55,8 +55,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .and()
                 .formLogin()
                 .loginPage("/login")
-//                .usernameParameter("uname")
-//                .passwordParameter("psw")
                 .permitAll()
                 .and()
                 .logout()

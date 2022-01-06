@@ -1,11 +1,18 @@
 package org.perscholas.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Table(name="users_roles")
 public class UsersRoles {
 

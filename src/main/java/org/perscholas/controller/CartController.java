@@ -46,6 +46,7 @@ public class CartController {
     @GetMapping("/showFormForUpdateCart/{id}")
     public String showFormForUpdateCart(@PathVariable(value = "id") long id, Model model) {
         Cart cart = cartService.getCartById(id);
+
         model.addAttribute("cart", cart);
         return "update_cart";
     }

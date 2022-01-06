@@ -1,25 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
 
 html{
-    font-size: 62.5%;
+    font-size: 100%;
     box-sizing: border-box;
 
 }
 body {
-    font: 1.6rem 'Lora';
+    font: 5rem 'Lora';
     height: 100vh;
     margin: 0;
 }
-.grid-container {
-    display: grid;
-    grid-template-areas:
-    "header"
-    "main"
-    "footer";
-    grid-template-columns: 1fr;
-    grid-template-rows: 5rem 1fr 5rem;
-    height: 100%;
-}
+
 .header {
     grid-area: header;
     display: flex;
@@ -38,6 +29,7 @@ body {
 .header-links a {
     color:#ffffff;
     text-decoration: none;
+    font-size: 1.5rem;
 }
 .header-link a:hover {
     color: #ff8000;
@@ -45,7 +37,7 @@ body {
 .main {
     grid-area: main;
 }
-.footer {
+footer {
     grid-area: footer;
     background-color: #203040;
     color: #ffffff;

@@ -42,7 +42,17 @@ public class OrderServiceImplement implements OrdersService {
         List<Orders> orders = getOrderByUserNum(userNum);
         Items items = itemsService.getItemById(id);
         String itemName = items.getItemName();
-        if (orders.isEmpty() || orders.stream().allMatch(order -> order.getOrderStatus().equals("Complete"))) {
+
+        boolean checkPending = false;
+
+        for (int i=0; i<orders.size(); i++) {
+            if ((orders.get(i).getOrderStatus()).equals("Pending")) {
+                checkPending = true;
+
+            }
+        }
+//        if (orders.isEmpty() || orders.stream().allMatch(order -> order.getOrderStatus().equals("Complete"))) {
+          if (orders.size() == 0 || !checkPending) {
             Orders tempOrder = new Orders();
             tempOrder.setUsers(user);
             tempOrder.setOrderStatus("Pending");
@@ -51,6 +61,8 @@ public class OrderServiceImplement implements OrdersService {
             tempCart.setItems(items);
             tempCart.setOrders(tempOrder);
             tempCart.setOrderQuantity(quantity);
+            double price = items.getItemPrice() * quantity;
+            tempCart.setSubTotal(price);
 
             tempOrder.setCart(new ArrayList<>());
             tempOrder.getCart().add(tempCart);
@@ -65,6 +77,12 @@ public class OrderServiceImplement implements OrdersService {
                             exists = true;
                             int orderQuantity = pendingOrder.getCart().get(i).getOrderQuantity();
                             pendingOrder.getCart().get(i).setOrderQuantity(orderQuantity + quantity);
+                            int changedQuantity = orderQuantity + quantity;
+
+                            double itemPrice = pendingOrder.getCart().get(i).getItems().getItemPrice();
+                            double subTotal = itemPrice * changedQuantity;
+                            pendingOrder.getCart().get(i).setSubTotal(subTotal);
+
                             cartService.saveCart(pendingOrder.getCart().get(i));
                         }
                     }
@@ -73,6 +91,8 @@ public class OrderServiceImplement implements OrdersService {
                         tempCart.setItems(items);
                         tempCart.setOrders(pendingOrder);
                         tempCart.setOrderQuantity(quantity);
+                        double price = items.getItemPrice() * quantity;
+                        tempCart.setSubTotal(price);
                         cartService.saveCart(tempCart);
                     }
                 } else {
@@ -80,6 +100,8 @@ public class OrderServiceImplement implements OrdersService {
                     tempCart.setItems(items);
                     tempCart.setOrders(pendingOrder);
                     tempCart.setOrderQuantity(quantity);
+                    double price = items.getItemPrice() * quantity;
+                    tempCart.setSubTotal(price);
                     cartService.saveCart(tempCart);
                 }
             }

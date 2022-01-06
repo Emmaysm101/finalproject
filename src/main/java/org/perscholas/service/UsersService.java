@@ -13,11 +13,13 @@ public interface UsersService extends UserDetailsService {
 	
 	void saveUser(Users users);
 	
-	Users getUserById (long id);
+	Users getUserByUserNumb(long id);
 
 	void deleteUserById(long id);
 
 	Users save(UserRegistrationDto registrationDto);
 
 	public Users getCurrentlyLoggedInCustomer(Authentication authentication);
+
+	Users getUserById(String userId);
 }

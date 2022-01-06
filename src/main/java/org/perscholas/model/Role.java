@@ -1,7 +1,14 @@
 package org.perscholas.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "role")
 public class Role {
@@ -9,13 +16,6 @@ public class Role {
     @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String roleName;
-
-    public Role() {
-    }
-
-    public Role(String roleName) {
-        this.roleName = roleName;
-    }
 
     public Long getId() {
         return id;

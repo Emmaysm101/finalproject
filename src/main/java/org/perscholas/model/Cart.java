@@ -1,6 +1,7 @@
 package org.perscholas.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Table(name = "cart_items")
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Data
 public class Cart {
 
@@ -24,10 +26,18 @@ public class Cart {
     @Column(name = "orderQuantity")
     private int orderQuantity;
 
+    @Column(name = "subTotal")
+    private double subTotal;
+
     @ManyToOne
     @JoinColumn(name = "orderId", referencedColumnName = "orderId")
     private Orders orders;
 
-
-
+    public Cart(Long cartId, Items items, int orderQuantity, Orders orders) {
+        this.cartId = cartId;
+        this.items = items;
+        this.orderQuantity = orderQuantity;
+        this.subTotal = orderQuantity * items.getItemPrice();
+        this.orders = orders;
+    }
 }

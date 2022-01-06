@@ -1,7 +1,5 @@
 package org.perscholas.controller;
 
-import java.util.List;
-
 import org.perscholas.model.Users;
 import org.perscholas.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +39,7 @@ public class UsersController {
 	
 	@GetMapping("/showFormForUpdate/{id}")
 	public String showFormForUpdate(@PathVariable (value = "id")long id, Model model ) {
-		Users users = usersService.getUserById(id);
+		Users users = usersService.getUserByUserNumb(id);
 		
 		model.addAttribute("users", users);
 		return "update_user";
@@ -52,4 +50,5 @@ public class UsersController {
 		this.usersService.deleteUserById(id);
 		return "redirect:/userList";
 	}
+
 }

@@ -32,9 +32,6 @@ public class UsersServiceImplement implements UsersService {
     @Autowired
     private RoleRepository roleRepository;
 
-    public UsersServiceImplement(UsersRepository usersRepository) {
-        this.usersRepository = usersRepository;
-    }
 
     @Override
     public List<Users> getAllUsers() {
@@ -47,7 +44,7 @@ public class UsersServiceImplement implements UsersService {
     }
 
     @Override
-    public Users getUserById(long id) {
+    public Users getUserByUserNumb(long id) {
         Optional<Users> optional = usersRepository.findById(id);
         Users users = null;
         if (optional.isPresent()) {
@@ -86,6 +83,7 @@ public class UsersServiceImplement implements UsersService {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getRoleName())).collect(Collectors.toList());
     }
 
+    @Override
     public Users getCurrentlyLoggedInCustomer(Authentication authentication) {
         if (authentication == null) {
             return null;
@@ -93,14 +91,16 @@ public class UsersServiceImplement implements UsersService {
         Users users = null;
         Object principal = authentication.getPrincipal();
 
-//        if(principal instanceof UserDetails) {
-            String username= ((UserDetails) principal).getUsername();
-            users = usersRepository.findByUserId(username);
-//        }else {
-//            String username = principal.toString();
-//            users = usersRepository.findByUserId(username);
-//        }
+        String username= ((UserDetails) principal).getUsername();
+        users = usersRepository.findByUserId(username);
+
 
         return users;
+    }
+
+    @Override
+    public Users getUserById(String userId) {
+        Users user = usersRepository.findByUserId(userId);
+        return user;
     }
 }

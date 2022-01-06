@@ -1,24 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
 
+html{
+    font-size: 100%;
+    box-sizing: border-box;
+
+}
+body {
+    font: 5rem 'Lora';
+    height: 100vh;
+    margin: 0;
+}
+
 .header {
     grid-area: header;
     display: flex;
-    background-color: #04AA6D;
+    background-color: #203040;
     color: #ffffff;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
+    padding: 2rem;
 }
-
 .brand a{
     color:#ffffff;
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     font-weight: bold;
     text-decoration: none;
 }
 .header-links a {
     color:#ffffff;
     text-decoration: none;
+    font-size: 1.5rem;
 }
 .header-link a:hover {
     color: #ff8000;
@@ -47,7 +58,7 @@
   
   /* Set a style for all buttons */
   button {
-    background-color: #04AA6D;
+    background-color: #1792d2;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;

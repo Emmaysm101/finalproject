@@ -1,30 +1,75 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
-
 body {
-    font-family:'Lora';
+    font: 1.5rem 'Lora';
+    height: 100vh;
+    margin: 0;
 }
+.grid-container {
+    display: grid;
+    grid-template-areas:
+    "header"
+    "main"
+    "footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: 2rem 1fr 2rem;
+    height: 100%;
+}
+.header {
+    grid-area: header;
+    display: flex;
+    background-color: #203040;
+    color: #ffffff;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+}
+.brand a{
+    color:#ffffff;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+.header-links a {
+    color:#ffffff;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+.header-link a:hover {
+    color: #ff8000;
+}
+
+/* Home */
 
 .details {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-start;
     flex-wrap: wrap;
     padding: 1rem;
 }
-
-.details-image {
-    flex: 2 1 60rem;
-}
-.details-image img {
+.details-info{
+    flex: 1 1 30rem;
     max-width: 30rem;
     width: 100%;
+    text-align: center;
+    margin: auto;
 }
-.details-info{
-    flex: 2 1 30rem;
+.details-image {
+    flex: 2 1 60rem;
+    margin: auto;
 }
+.details-image img {
+    max-width: 40rem;
+    width: 100%;
+}
+
 .details-action {
-    flex: 2 1 30rem;
+    flex: 1 1 30rem;
     max-width: 500px;
+    border-radius: 0.5rem;
+    text-align: center;
+    padding: 1rem;
+    margin: auto;
 }
 .details-info ul, .details-action ul{
     list-style-type: none;
@@ -33,15 +78,7 @@ body {
 .details-info li, .details-action li{
     margin-bottom: 1rem;
 }
-.back-to-the-list {
-    padding: 1rem;
-}
-.details-action {
-    border: .1rem #808080 solid;
-    border-radius: 0.5rem;
-    background-color: #f8f8f8;
-    padding: 1rem;
-}
+
 .details-action ul li:last-child {
     display: flex;
     flex-direction: column;
@@ -57,14 +94,6 @@ button:hover {
     background-color: white;
 }
 
-#goBack {
-    transition-duration: 0.4s;
-    padding:0.3rem;
-    border: none;
-    margin-left: 1rem;
-}
 
-#goBack:hover {
-    background-color: white;
-    color: #ff8000;
-}
+
+
