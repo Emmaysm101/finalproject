@@ -1,6 +1,7 @@
 # finalproject
 
 User stories
+
 As the owner of this store, I want to have a fine website so that many people are interested in my products. 
 As the owner of this store, I want to show customers about specific product details so that customers can see the details and add them to their cart. 
 As the administrator of this store, I want customers to see their cart items when they log in so that they can check out the items easily. 
