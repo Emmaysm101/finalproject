@@ -2,13 +2,13 @@
 
 User stories
 
-As the owner of this store, I want to have a fine website so that many people are interested in my products. 
-As the owner of this store, I want to show customers about specific product details so that customers can see the details and add them to their cart. 
-As the administrator of this store, I want customers to see their cart items when they log in so that they can check out the items easily. 
-As the administrator of this store, I want customers to see their previous order lists when they check out their items so that customers can see their order lists.
-As the administrator of this store, I want customers who can’t access some specific pages so that secure information.
-As the administrator of this store, I want to see my product, users, and order lists easily so that I can manage those lists.
-As the administrator of this store, I want to see the products list on the website so that when I register a new item, the item will show up in the list automatically. 
+As the owner of this store, I want to have a fine website so that many people are interested in my products.   
+As the owner of this store, I want to show customers about specific product details so that customers can see the details and add them to their cart.   
+As the administrator of this store, I want customers to see their cart items when they log in so that they can check out the items easily.   
+As the administrator of this store, I want customers to see their previous order lists when they check out their items so that customers can see their order lists.  
+As the administrator of this store, I want customers who can’t access some specific pages so that secure information.  
+As the administrator of this store, I want to see my product, users, and order lists easily so that I can manage those lists.  
+As the administrator of this store, I want to see the products list on the website so that when I register a new item, the item will show up in the list automatically.   
 
 Technical challenges
 
