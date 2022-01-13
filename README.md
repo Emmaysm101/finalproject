@@ -10,6 +10,7 @@ As the administrator of this store, I want to see my product, users, and order l
 As the administrator of this store, I want to see the products list on the website so that when I register a new item, the item will show up in the list automatically. 
 
 Technical challenges
+
 Implementing the cart function, and connecting the cart function to the order function, was the most challenging thing for me. 
 When users want to put items in their cart, I get the order list by user Id and check the order list whether it has a pending order or not. 
 If there is a pending order, I get the order and get the cart in the order, and put the items in the cart. 
